@@ -4,19 +4,36 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "start:dev": "nodemon index.js",
-    "test": "jest"
+    "start": "cross-env NODE_ENV=production node index.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon index.js",
+    "start:db": "mongod --dbpath ~/data/db",
+    "test": "jest --watchAll",
+    "testc": "jest --coverage",
+    "seed": "node utils/seed.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.10"
   },
   "devDependencies": {
     "jest": "^25.4.0",
+    "mongodb-memory-server": "^6.5.2",
     "nodemon": "^2.0.3",
     "supertest": "^4.0.2"
+  },
+  "jest": {
+    "globalSetup": "./utils/testSetup.js",
+    "globalTeardown": "./utils/testTeardown.js",
+    "testEnvironment": "node"
   }
 }
